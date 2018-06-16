@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+
+  kibana:
+    image: kibana:latest
+    ports:
+      - 5601:5601
+
+  elasticsearch:
+    image: elasticsearch:latest
+    # Uncomment volume for persistance in restarts.
+    ports:
+      - 9200:9200
+    volumes:
+      - ./data:/usr/share/elasticsearch/data
+
+  python-runner:
+    image: user-api:latest
+    build: .
+    ports:
+      - 5000:5000
